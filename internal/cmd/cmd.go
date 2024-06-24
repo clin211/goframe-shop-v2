@@ -20,11 +20,6 @@ var (
 		Brief: consts.ProjectBrief,
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
 			s := g.Server()
-			//订单超时未评价默认好评
-			//err = UserOrderDefaultComments(ctx)
-			//if err != nil {
-			//	panic(err)
-			//}
 			// 启动管理后台gtoken
 			gfAdminToken, err := StartBackendGToken()
 			if err != nil {
@@ -73,7 +68,7 @@ var (
 					)
 				})
 			})
-			//---------------------华丽的分割线-------------------
+
 			// 启动前台项目gtoken
 			frontendToken, err := StartFrontendGToken()
 			if err != nil {
@@ -88,8 +83,9 @@ var (
 				)
 				//不需要登录的路由组绑定
 				group.Bind(
-					controller.User.Register, //用户注册
-					controller.Goods,         //商品
+					controller.User.Register,         //用户注册
+					controller.Goods,                 //商品
+					controller.Rotation.ListFrontend, //轮播图
 				)
 				//需要登录鉴权的路由组
 				group.Group("/", func(group *ghttp.RouterGroup) {
@@ -107,12 +103,13 @@ var (
 						controller.Cart,                //购物车
 						controller.Order.Add,           //下单
 						controller.OrderGoodsComments,  //订单评价
-						frontend.Article,               //文章 @author自愚自乐
-						frontend.Refund,                //售后 @author自愚自乐
+						frontend.Article,               //文章
+						frontend.Refund,                //售后
 					)
 				})
 			})
-			s.SetPort(8000) //设置端口
+			port := g.Cfg().MustGet(ctx, "server.address").Int()
+			s.SetPort(port) //设置端口
 			s.Run()
 			return nil
 		},
