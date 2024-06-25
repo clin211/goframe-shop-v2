@@ -86,6 +86,7 @@ var (
 					controller.User.Register,         //用户注册
 					controller.Goods,                 //商品
 					controller.Rotation.ListFrontend, //轮播图
+					controller.Category.List,         //商品分类
 				)
 				//需要登录鉴权的路由组
 				group.Group("/", func(group *ghttp.RouterGroup) {
