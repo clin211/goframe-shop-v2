@@ -20,3 +20,5 @@ manifest/output/
 temp/
 logs/
 data/
+hack/config.yaml
+manifest/config/config.yaml
