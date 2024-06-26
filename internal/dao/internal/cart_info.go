@@ -33,7 +33,7 @@ type CartInfoColumns struct {
 var cartInfoColumns = CartInfoColumns{
 	Id:             "id",
 	UserId:         "user_id",
-	GoodsOptionsId: "goods_options_id",
+	GoodsOptionsId: "goods_id",
 	Count:          "count",
 	CreatedAt:      "created_at",
 	UpdatedAt:      "updated_at",
