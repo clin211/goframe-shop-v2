@@ -34,7 +34,7 @@ func (s *sRotation) Create(ctx context.Context, in model.RotationCreateInput) (o
 
 // Delete 删除
 func (s *sRotation) Delete(ctx context.Context, id uint) error {
-	return dao.RotationInfo.Transaction(ctx, func(ctx context.Context, tx *gdb.TX) error {
+	return dao.RotationInfo.Transaction(ctx, func(ctx context.Context, tx gdb.TX) error {
 		// 删除内容
 		_, err := dao.RotationInfo.Ctx(ctx).Where(g.Map{
 			dao.RotationInfo.Columns().Id: id,
@@ -45,7 +45,7 @@ func (s *sRotation) Delete(ctx context.Context, id uint) error {
 
 // Update 修改
 func (s *sRotation) Update(ctx context.Context, in model.RotationUpdateInput) error {
-	return dao.RotationInfo.Transaction(ctx, func(ctx context.Context, tx *gdb.TX) error {
+	return dao.RotationInfo.Transaction(ctx, func(ctx context.Context, tx gdb.TX) error {
 		// 不允许HTML代码
 		if err := ghtml.SpecialCharsMapOrStruct(in); err != nil {
 			return err

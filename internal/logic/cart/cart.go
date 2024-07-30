@@ -2,13 +2,14 @@ package cart
 
 import (
 	"context"
-	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/util/gconv"
 	"goframe-shop-v2/internal/consts"
 	"goframe-shop-v2/internal/dao"
 	"goframe-shop-v2/internal/model"
 	"goframe-shop-v2/internal/model/entity"
 	"goframe-shop-v2/internal/service"
+
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/util/gconv"
 )
 
 type sCart struct {
@@ -72,6 +73,7 @@ func (s *sCart) List(ctx context.Context, in model.ListCartInput) (out *model.Li
 	}
 	//3. 分页查询
 	listModel := m.Page(in.Page, in.Size)
+
 	//4. 再查询count，判断有无数据
 	out.Total, err = m.Count()
 	if err != nil || out.Total == 0 {
@@ -83,5 +85,11 @@ func (s *sCart) List(ctx context.Context, in model.ListCartInput) (out *model.Li
 	if err := listModel.WithAll().Scan(&out.List); err != nil {
 		return out, err
 	}
+	// 使用 json.MarshalIndent 格式化输出
+	//if data, err := json.MarshalIndent(out.List, "", "  "); err == nil {
+	//	fmt.Printf("Cart list data:\n%s\n", string(data))
+	//} else {
+	//	fmt.Printf("Failed to marshal data: %v\n", err)
+	//}
 	return
 }

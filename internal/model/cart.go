@@ -41,7 +41,7 @@ type ListCartBase struct {
 	UserId         int             `json:"user_id"         description:""`
 	GoodsOptionsId int             `json:"goods_options_id" description:""`
 	Count          int             `json:"count"          description:"商品数量"`
-	Ops            ListCartOpsBase `json:"ops" orm:"with:id=goods_options_id"`
+	Ops            ListCartOpsBase `json:"goods_info" orm:"with:id=goods_options_id"`
 	CreatedAt      *gtime.Time     `json:"created_at"      description:""`
 	UpdatedAt      *gtime.Time     `json:"updated_at"      description:""`
 	DeletedAt      *gtime.Time     `json:"deleted_at"      description:""`

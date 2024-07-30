@@ -36,7 +36,7 @@ func (s *sStock) DecrementWithSql(ctx context.Context, in model.DecStockInput) (
 	if goodsOpt.Stock <= 0 {
 		return gerror.New("商品库存不足")
 	}
-	err = g.DB().Transaction(ctx, func(ctx context.Context, tx *gdb.TX) error {
+	err = g.DB().Transaction(ctx, func(ctx context.Context, tx gdb.TX) error {
 		//库存大于0 商品减少库存
 		_, err2 := dao.GoodsInfo.Ctx(ctx).WherePri(in.GoodsId).WhereGT(dao.GoodsInfo.Columns().Stock, 0).
 			Decrement(dao.GoodsInfo.Columns().Stock, in.Number)

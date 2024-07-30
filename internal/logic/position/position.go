@@ -34,7 +34,7 @@ func (s *sPosition) Create(ctx context.Context, in model.PositionCreateInput) (o
 
 // Delete 删除
 func (s *sPosition) Delete(ctx context.Context, id uint) error {
-	return dao.PositionInfo.Transaction(ctx, func(ctx context.Context, tx *gdb.TX) error {
+	return dao.PositionInfo.Transaction(ctx, func(ctx context.Context, tx gdb.TX) error {
 		// 删除内容
 		_, err := dao.PositionInfo.Ctx(ctx).Where(g.Map{
 			dao.PositionInfo.Columns().Id: id,
@@ -45,7 +45,7 @@ func (s *sPosition) Delete(ctx context.Context, id uint) error {
 
 // Update 修改
 func (s *sPosition) Update(ctx context.Context, in model.PositionUpdateInput) error {
-	return dao.PositionInfo.Transaction(ctx, func(ctx context.Context, tx *gdb.TX) error {
+	return dao.PositionInfo.Transaction(ctx, func(ctx context.Context, tx gdb.TX) error {
 		// 不允许HTML代码
 		if err := ghtml.SpecialCharsMapOrStruct(in); err != nil {
 			return err

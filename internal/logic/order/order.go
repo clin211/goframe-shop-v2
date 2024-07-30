@@ -30,7 +30,7 @@ func (s *sOrder) Add(ctx context.Context, in model.OrderAddInput) (out *model.Or
 	in.Number = utility.GetOrderNum()
 	out = &model.OrderAddOutput{}
 	//官方建议的事务闭包处理
-	err = g.DB().Transaction(ctx, func(ctx context.Context, tx *gdb.TX) error {
+	err = g.DB().Transaction(ctx, func(ctx context.Context, tx gdb.TX) error {
 		//生成主订单
 		lastInsertId, err := dao.OrderInfo.Ctx(ctx).InsertAndGetId(in)
 		if err != nil {
