@@ -74,8 +74,8 @@ deploy:
 
 .PHONY: build
 build:
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main main.go
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./temp/main main.go
 
 .PHONY: scp
 scp:
-	scp ./temp/main ./manifest/config/config.yaml root@8.137.36.89:/root/projects/goframe-shop-v2
+	scp -r ./temp/main ./manifest/config/config.yaml root@8.137.36.89:/root/projects/goframe-shop-v2

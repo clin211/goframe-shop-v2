@@ -85,11 +85,5 @@ func (s *sCart) List(ctx context.Context, in model.ListCartInput) (out *model.Li
 	if err := listModel.WithAll().Scan(&out.List); err != nil {
 		return out, err
 	}
-	// 使用 json.MarshalIndent 格式化输出
-	//if data, err := json.MarshalIndent(out.List, "", "  "); err == nil {
-	//	fmt.Printf("Cart list data:\n%s\n", string(data))
-	//} else {
-	//	fmt.Printf("Failed to marshal data: %v\n", err)
-	//}
 	return
 }

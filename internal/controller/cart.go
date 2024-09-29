@@ -2,10 +2,11 @@ package controller
 
 import (
 	"context"
-	"github.com/gogf/gf/v2/util/gconv"
 	"goframe-shop-v2/api/frontend"
 	"goframe-shop-v2/internal/model"
 	"goframe-shop-v2/internal/service"
+
+	"github.com/gogf/gf/v2/util/gconv"
 )
 
 var Cart = cCart{}
@@ -47,4 +48,16 @@ func (a *cCart) List(ctx context.Context, req *frontend.ListCartReq) (res *front
 		return nil, err
 	}
 	return data, nil
+}
+
+func (a *cCart) Update(ctx context.Context, req *frontend.UpdateCartReq) (res *frontend.UpdateCartRes, err error) {
+	data := model.AddCartInput{}
+	err = gconv.Struct(req, &data)
+	if err != nil {
+		return nil, err
+	}
+
+	//out, err :=
+	// TODO: WIP
+	return nil, nil
 }

@@ -13,7 +13,7 @@ type AddCartRes struct {
 }
 
 type DeleteCartReq struct {
-	g.Meta `path:"/delete/cart" in:"post" method:"post" tags:"前台购物车" summary:"移除购物车"`
+	g.Meta `path:"/cart/delete" in:"post" method:"post" tags:"前台购物车" summary:"移除购物车"`
 	Id     uint `json:"id"`
 }
 
@@ -24,6 +24,15 @@ type DeleteCartRes struct {
 type ListCartReq struct {
 	g.Meta `path:"/cart/list" method:"post" tags:"前台购物车" summary:"购物车列表"`
 	CommonPaginationReq
+}
+
+type UpdateCartReq struct {
+	g.Meta         `path:"/cart/update" method:"post" tags:"前台购物车" summary:"更新购物车"`
+	GoodsOptionsId uint `json:"goods_options_id"`
+	Count          uint `json:"count"`
+}
+
+type UpdateCartRes struct {
 }
 
 type ListCartRes struct {
